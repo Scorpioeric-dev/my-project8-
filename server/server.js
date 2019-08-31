@@ -6,7 +6,7 @@ const ctrl = require('./controller')
 app.listen(port,()=> console.log(`Me and my ${port}`))
 
 app.get(`/api/cars`, ctrl.getData)
-app.get(`/api/cars/:id`,ctrl.getDataId)
+app.get(`/api/car/:id`,ctrl.getDataById)
 
 
 

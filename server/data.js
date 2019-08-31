@@ -61,7 +61,32 @@ const sportCars = [
     type: "sport",
     img:
       "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/body-image/public/maserati-granturismo_2.jpg?itok=2iHRozrR"
+  },
+  {
+    id: 8,
+    model: "Lambo",
+    year: 2020,
+    color: "",
+    type: "sport",
+    img:""
+  },
+  {
+    id: 9,
+    model: "Enzo",
+    year: 2020,
+    color: "",
+    type: "sport",
+    img:""
+  },
+  {
+    id: 10,
+    model: "G-Wagon",
+    year: 2020,
+    color: "",
+    type: "sport",
+    img:""
   }
+
 ];
 
 module.exports = sportCars
