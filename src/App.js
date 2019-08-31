@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import Header from "./Component/Header";
-import Nav from "./Component/Nav";
-import Content from "./Component/Content";
+import Header from "./Components/Header";
+import Nav from "./Components/Nav";
+import Content from "./Components/Content";
 
 class App extends Component {
   constructor() {
