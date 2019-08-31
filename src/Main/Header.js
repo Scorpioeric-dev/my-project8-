@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import HeaderImg from "./headerImg";
+import HeaderImg from "./HeaderImg";
 
 class Header extends Component {
   constructor(props) {
