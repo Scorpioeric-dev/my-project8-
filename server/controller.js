@@ -17,7 +17,11 @@ module.exports = {
     let { model, type, year, img } = req.body;
     data.push({ ...req.body, id, model, type, year, img });
     id++;
+<<<<<<< HEAD
     res.status(200).send(data);
+=======
+    res.status(200).send(data)
+>>>>>>> ba64c23c2fdfb457939e699048ff7d27eaf4d985
   },
 
   removeData: (req, res) => {
