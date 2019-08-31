@@ -17,7 +17,9 @@ module.exports = {
     let { model, type, year, img } = req.body;
     data.push({ ...req.body, id, model, type, year, img });
     id++;
-    res.status(200).send(data);
+    res.status(200).send(data)
+  }
+};
   },
   removeData:(req,res) => {
       const {id} = req.params
@@ -38,3 +40,4 @@ module.exports = {
   }
 
 };
+
