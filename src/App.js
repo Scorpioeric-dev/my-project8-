@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./App.css";
 import Header from "./Main/Header";
-import Nav from "./Main/nav";
+import Nav from "./Main/Nav";
+import Content from "./Main/Content";
 
 class App extends Component {
   constructor() {
@@ -16,27 +16,6 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    this.getData();
-    // console.log(res.data)
-  }
-
-  getData() {
-    axios
-      .get(`/api/cars`)
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          sportCars: res.data,
-          currentImg: res.data[res.data.Length - 1].img
-        });
-      })
-      .catch(error => {
-        alert(error);
-        //user method
-      });
-  }
-
   handleChange(e) {
     this.setState({
       userInput: e
@@ -44,21 +23,11 @@ class App extends Component {
   }
 
   render() {
-    let mappedData = this.state.sportCars.map(taco => {
-      return (
-        <div key={taco.id}>
-          <h1>
-            {taco.model} {taco.color} {taco.type} {taco.img}
-          </h1>
-        </div>
-      );
-    });
     return (
       <main className="App">
         <Nav />
-        
         <Header />
-        {mappedData}
+        <Content />
       </main>
     );
   }
