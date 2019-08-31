@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
+
 export class Content extends Component {
   state = {
     sportCars: [],
@@ -46,17 +47,52 @@ export class Content extends Component {
     });
   };
 
+  putData = id => {
+    const { model, year, type, img } = this.state;
+    axios.put(`/api/car/${id}`, { model, year, type, img }).then(res => {
+      console.log(res.data);
+      this.setState({
+        sportCars: res.data
+      });
+    });
+  };
+
+  removeData = id => {
+    axios.delete(`/api/car/${id}`).then(res => {
+      console.log(res.data);
+      this.setState({
+        sportcars: res.data
+      });
+    });
+  };
+
+  postData = () => {
+    const { model, year, type, img } = this.state;
+    axios.post(`/api/cars`, { model, year, type, img }).then(res => {
+      this.setState({
+        sportcars: res.data
+      });
+    });
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
   render() {
     const { sportCars } = this.state;
     console.log(this.state.sportCars);
     let mapped = sportCars.map(car => {
       return (
         <Container key={car.id}>
-        <Button onClick={() => this.getOne(car.id)}>Pick Car</Button>
+          <Button onClick={() => this.getOne(car.id)}>Pick Car</Button>
           <h1>{car.model}</h1>
           <h2>{car.year}</h2>
           <h2>{car.type}</h2>
           <img src={car.img} alt="cars" />
+          <Button onClick={() => this.removeData(car.id)}>Delete</Button>
           <InputContainer>
             <span>Model</span>
             <span>Year</span>
@@ -64,15 +100,21 @@ export class Content extends Component {
             <span>Img</span>
           </InputContainer>
           <InputContainer>
-            <input type="text" name="model" />
-            <input type="text" name="year" />
-            <input type="text" name="type" />
-            <input type="text" name="img" />
+            <input onChange={this.handleChange} type="text" name="model" />
+            <input onChange={this.handleChange} type="text" name="year" />
+            <input onChange={this.handleChange} type="text" name="type" />
+            <input onChange={this.handleChange} type="text" name="img" />
           </InputContainer>
+
+          <Button onClick={() => this.putData(car.id)}>Update Car</Button>
         </Container>
       );
     });
-    return <div>{mapped}</div>;
+    return (
+      <div>
+        {mapped} <Button onClick={this.postData}> Create Car</Button>
+      </div>
+    );
   }
 }
 
@@ -88,7 +130,7 @@ const InputContainer = styled.div`
 `;
 
 const Button = styled.button`
- background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -96,6 +138,6 @@ const Button = styled.button`
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-`
+`;
 
 export default Content;
