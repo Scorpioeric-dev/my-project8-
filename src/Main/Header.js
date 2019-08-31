@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import HeaderImg from "./headerImg";
-import Nav from './nav'
 
 class Header extends Component {
   constructor(props) {
