@@ -18,8 +18,6 @@ module.exports = {
     data.push({ ...req.body, id, model, type, year, img });
     id++;
     res.status(200).send(data)
-  }
-};
   },
   removeData:(req,res) => {
       const {id} = req.params
