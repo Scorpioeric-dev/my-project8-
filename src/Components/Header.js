@@ -12,8 +12,8 @@ class Header extends Component {
       <div style={{border:'1px solid black'}}>
         <header className="sportRides">
           <HeaderImg />
-          <h1 id="Header" style={{ color: "red" }}>
-            Collectibles
+          <h1 id="Header" style={{ color: "blue" }}>
+            Baller Whips
           </h1>
           <HeaderImg />
         </header>

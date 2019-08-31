@@ -1,11 +1,21 @@
 import React from "react";
+import ReactPlayer from "react-player";
 
 export default function imgImporter() {
   return (
     <div className="symbols">
-      <a href="https://en.wikipedia.org/wiki/Enzo_Ferrari_(automobile)">
+      <a
+        href="https://youtu.be/Fwq2qqpl3oU"
+        playing
+        controls
+        class="my_class_name"
+        width="640"
+        height="560"
+        frameborder="0"
+        allowfullscreen
+      >
         <img
-          src="https://image.shutterstock.com/image-photo/kiev-ukraine-14-may-2014-600w-521587123.jpg"
+          src="https://image.shutterstock.com/image-vector/vector-illustration-sports-car-racing-600w-191274035.jpg"
           alt="car"
         />
       </a>

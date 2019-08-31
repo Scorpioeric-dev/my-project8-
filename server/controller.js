@@ -17,27 +17,23 @@ module.exports = {
     let { model, type, year, img } = req.body;
     data.push({ ...req.body, id, model, type, year, img });
     id++;
-    res.status(200).send(data)
+    res.status(200).send(data);
+  },
+
+  removeData: (req, res) => {
+    const { id } = req.params;
+    const index = data.findIndex(taco => taco.id === +id);
+    data.splice(index, 1);
+    res.status(200).send(data);
+  },
+  putData: (req, res) => {
+    const { id } = req.params;
+    const { year, img, type, model } = req.body;
+    const index = data.findIndex(taco => taco.id === +id);
+    data[index].img = img;
+    data[index].type = type;
+    data[index].year = year;
+    data[index].model = model;
+    res.status(200).send(data);
   }
 };
-  },
-  removeData:(req,res) => {
-      const {id} = req.params
-      const index = data.findIndex(taco => taco.id === +id)
-      data.splice(index, 1)
-      res.status(200).send(data)
-
-  },
-  putData:(req,res) => {
-      const {id} = req.params
-      const {year,img,type,model} = req.body
-      const index = data.findIndex(taco => taco.id === +id)
-      data[index].img =img
-      data[index].type = type
-      data[index].year = year
-      data[index].model = model
-      res.status(200).send(data)
-  }
-
-};
-
