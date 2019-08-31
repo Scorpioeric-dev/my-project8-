@@ -18,7 +18,7 @@ class App extends Component {
 
   componentDidMount() {
     this.getData();
-    console.log(res.data)
+    // console.log(res.data)
   }
 
   getData() {
