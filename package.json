@@ -2,7 +2,17 @@
   "name": "cars",
   "version": "0.1.0",
   "private": true,
+  "main": "server/server.js",
+  "proxy": "http://localhost:4444",
+  "nodemonConfig": {
+    "ignore": [
+      "src/*",
+      "public/*"
+    ]
+  },
   "dependencies": {
+    "axios": "^0.19.0",
+    "express": "^4.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
