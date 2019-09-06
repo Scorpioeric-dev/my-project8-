@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import HeaderImg from "./HeaderImg";
+import About from "./About";
+import Create from "./Create";
 
 class Header extends Component {
   constructor(props) {
@@ -8,19 +10,17 @@ class Header extends Component {
   }
 
   render() {
+    
     return (
       <div>
         <header className="sportRides">
           <HeaderImg />
-          <h1 id="Header" style={{ color: "blue" }}>
+          <h1 id="Header" style={{ color: "blue"}}>
             Baller Whips
           </h1>
-          <HeaderImg />
+          <HeaderImg/>
         </header>
       </div>
-    
-      
-    
     );
   }
 }

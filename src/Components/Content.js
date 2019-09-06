@@ -10,10 +10,10 @@ export class Content extends Component {
     type: "",
     img: "",
     id: "",
-    specificCar: []
+    specificCar: [],
+    index:0
   };
 
-  
   componentDidMount() {
     this.getData();
   }
@@ -51,7 +51,7 @@ export class Content extends Component {
       });
     });
   };
-//work on the delete function 
+  //work on the delete function
   removeData = id => {
     axios.delete(`/api/car/${id}`).then(res => {
       // console.log(res.data);
@@ -60,7 +60,6 @@ export class Content extends Component {
       });
     });
   };
- 
 
   postData = () => {
     const { model, year, type, img } = this.state;
@@ -82,40 +81,25 @@ export class Content extends Component {
     console.log(this.state.sportCars);
     let mapped = sportCars.map(car => {
       return (
-        <Container key={car.id}>
-        <div>
-        <h1>{car.model}</h1>
-        
-        <h2>{car.year}</h2>
-        <h2>{car.type}</h2>
-        </div>
-        <Image src={car.img} alt="cars" />
-        <div>
-        <Button onClick={() => this.getOne(car.id)}>Pick Car</Button>
-        <Button onClick={() => this.putData(car.id)}>Update Car</Button>
-        <Button onClick={() => this.removeData(car.id)}>Delete</Button>
-        </div>
-        <InputContainer>
-        <span>Model</span>
-        <span>Year</span>
-        <span>Type</span>
-        <span>Img</span>
-        </InputContainer>
-        <InputContainer>
-        <input onChange={this.handleChange} type="text" name="model" />
-            <input onChange={this.handleChange} type="text" name="year" />
-            <input onChange={this.handleChange} type="text" name="type" />
-            <input onChange={this.handleChange} type="text" name="img" />
-          </InputContainer>
+        <div className="body">
+          <Container key={car.id}>
+            <div>
+              <h1>{`Model: ${car.model}`}</h1>
+              <h2>{`Year: ${car.year}`}</h2>
+              <h2>{`Type: ${car.type}`}</h2>
+            </div>
 
-        </Container>
+            <Image src={car.img} alt="cars" />
+            <div>
+              <Button onClick={() => this.getOne(car.id)}>Pick Car</Button>
+              <Button onClick={() => this.putData(car.id)}>Update Car</Button>
+              <Button onClick={() => this.removeData(car.id)}>Delete</Button>
+            </div>
+          </Container>
+        </div>
       );
     });
-    return (
-      <div>
-        {mapped} <Button onClick={this.postData}> Create Car</Button>
-      </div>
-    );
+    return <div>{mapped}</div>;
   }
 }
 
@@ -127,12 +111,11 @@ const Container = styled.div`
   top: 20vh;
   bottom: 20vh;
   flex-wrap: wrap;
+
+  
 `;
 
-const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+
 
 const Button = styled.button`
   background-color: blue;
@@ -144,11 +127,23 @@ const Button = styled.button`
   display: inline-block;
   font-size: 10px;
   border-radius: 6px;
-  
+  box-shadow:4px 4px grey;
+  justify-content:space-between;
+  margin:5px;
 `;
 const Image = styled.img`
-  height: 20vh;
-  width: 20vw;
+background:black;
+  height: 44vh;
+  width: 40vw;
+  border:light grey;
+  border-radius:8px;
+  align-items:center;
+  margin:80px;
+  padding:30px;
+  box-shadow: 10px 8px grey;
+
+  
+  
 `;
 
 export default Content;
