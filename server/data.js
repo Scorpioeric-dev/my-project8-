@@ -68,7 +68,8 @@ const sportCars = [
     year: 2020,
     color: "Canary yellow",
     type: "sport",
-    img:"https://images.unsplash.com/photo-1511919884226-fd3cad34687c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+    img:
+      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
   },
   {
     id: 9,
@@ -76,7 +77,8 @@ const sportCars = [
     year: 2020,
     color: "Fire engine Red",
     type: "sport",
-    img:"https://image.shutterstock.com/image-photo/modena-italy-may-2017-museum-600w-673659265.jpg"
+    img:
+      "https://image.shutterstock.com/image-photo/modena-italy-may-2017-museum-600w-673659265.jpg"
   },
   {
     id: 10,
@@ -84,9 +86,18 @@ const sportCars = [
     year: 2020,
     color: "Shadow",
     type: "sport",
-    img:"https://images.unsplash.com/photo-1492967396498-f79507b65e89?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+    img:
+      "https://images.unsplash.com/photo-1492967396498-f79507b65e89?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+  },
+  {
+    id: 11,
+    model: "Honda Civic",
+    year: 2020,
+    color: "red",
+    type: "sport",
+    img:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbWeCKTDhcExqif3IvJP-7iOj7vKoURTPJLc7bXNKNRWVIXRtlpw"
   }
-
 ];
 
-module.exports = sportCars
+module.exports = sportCars;

@@ -9,7 +9,7 @@ class Header extends Component {
 
   render() {
     return (
-      <div style={{border:'1px solid black'}}>
+      <div>
         <header className="sportRides">
           <HeaderImg />
           <h1 id="Header" style={{ color: "blue" }}>

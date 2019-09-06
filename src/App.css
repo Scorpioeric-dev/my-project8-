@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -24,14 +13,44 @@
   justify-content: space-around;
   align-items: flex-start;
   align-content: space-around;
-  font-family: fantasy;
-  font-size: 20px;
-  padding: 10px;
-  position: fixed;
+  font-family: cursive;
+  font-size: 30px;
+  padding: 20px;
+  position: relative;
   width: 100%;
-  top: 0px;
+  height: 15vh;
+  margin: 8px;
 }
 .symbols img {
-  height: 125px;
+  height: 100px;
   width: 125px;
+}
+.button {
+  background-color: white;
+  border: red;
+  padding: 5px;
+  font-size: 1.2rem;
+  
+  color: white;
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  font-size: 16px;
+  margin: 0;
+}
+.button2 {
+  border-radius: 8px;
+  background-color: white;
+  border: gray;
+  padding: 10px;
+  font-size: 1.2rem;
+
+  color: white;
+  padding: 15px;
+  text-align: right;
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 16px;
 }
