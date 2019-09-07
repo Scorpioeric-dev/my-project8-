@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default class Create extends Component {
   state = {
@@ -25,9 +26,7 @@ export default class Create extends Component {
   postData = () => {
     const { model, year, type, img } = this.state;
     axios.post(`/api/cars`, { model, year, type, img }).then(res => {
-      this.setState({
-        sportcars: res.data
-      });
+      this.setState({ sportCars: res.data });
     });
   };
   handleChange = e => {
@@ -50,9 +49,8 @@ export default class Create extends Component {
           <input onChange={this.handleChange} type="text" name="img" />
         </InputContainer>
         <InputContainer>
-        <Button onClick={this.postData}> Create Car</Button>
+          <Button onClick={this.postData}> Create Car</Button>
         </InputContainer>
-        
       </div>
     );
   }
@@ -60,11 +58,11 @@ export default class Create extends Component {
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 20px;
-  padding: 50px;
+  border-radius: 40px;
+  padding: 40px;
   height: 20vh;
-  width: 18vw;
-  margin:20px;
+  width: 17vw;
+  margin: 20px;
 `;
 const Button = styled.button`
   background-color: blue;
@@ -79,5 +77,5 @@ const Button = styled.button`
   box-shadow: 4px 4px grey;
   justify-content: space-between;
   margin: 15px;
-  
+  width: 10vw;
 `;

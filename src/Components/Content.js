@@ -8,10 +8,12 @@ export class Content extends Component {
     model: "",
     year: "",
     type: "",
-    img: "",
+    currentImg: "",
     id: "",
-    specificCar: [],
-    index:0
+    filteredCar: [],
+    filteredId: 0,
+    userInput: "",
+    index: 0
   };
 
   componentDidMount() {
@@ -22,9 +24,10 @@ export class Content extends Component {
     axios
       .get(`/api/cars`)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({
-          sportCars: res.data
+          sportCars: res.data,
+          currentImg: res.data[res.data.length - 1].img
         });
       })
       .catch(error => {
@@ -33,31 +36,53 @@ export class Content extends Component {
       });
   }
 
-  getOne = id => {
-    axios.get(`/api/car/${id}`).then(res => {
-      console.log([res.data]);
-      this.setState({
-        sportCars: [res.data]
-      });
-    });
-  };
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevState.sportCars.length &&
+      prevState.sportCars.length !== this.state.sportCars.length
+    ) {
+      this.getData();
+    }
+  }
+  // getCar = (userInput) => {
+  //   let filteredCar = this.state.sportCars.filter(ele => {
+  //     return ele.name.toLowerCase().includes(userInput.toLowerCase());
+  //   });
+  //   if (filteredCar[0]) {
+  //     this.setState({
+  //       currentImg: filteredCar[0].img,
+  //       model: filteredCar[0].model,
+  //       year: filteredCar[0].year,
+  //       type: filteredCar[0].type
+  //     });
+  //   } else {
+  //     alert("Does Not Exist");
+  //   }
+  // }
 
-  putData = id => {
-    const { model, year, type, img } = this.state;
-    axios.put(`/api/car/${id}`, { model, year, type, img }).then(res => {
+  // getOne = id => {
+  //   axios.get(`/api/car/${id}`).then(res => {
+  //     // console.log([res.data]);
+  //     this.setState({
+  //       sportCars: [res.data]
+  //     });
+  //   });
+  // };
+  //work on the put function is not working on front end or backend
+  putData = (id, body) => {
+    // const { model, year, type, img } = this.state;
+    axios.put(`/api/car/${id}`, body).then(res => {
       // console.log(res.data);
       this.setState({
         sportCars: res.data
       });
     });
   };
-  //work on the delete function
+
   removeData = id => {
     axios.delete(`/api/car/${id}`).then(res => {
       // console.log(res.data);
-      this.setState({
-        sportcars: res.data
-      });
+      this.setState({ sportCars: res.data });
     });
   };
 
@@ -72,34 +97,41 @@ export class Content extends Component {
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      userInput: e
     });
   };
 
   render() {
-    const { sportCars } = this.state;
-    console.log(this.state.sportCars);
+    let { sportCars } = this.state;
+    console.log(this.state);
     let mapped = sportCars.map(car => {
       return (
-        <div className="body">
-          <Container key={car.id}>
+        <div className="body" key={car.id} data={car}>
+        
+          <Container>
             <div>
-              <h1>{`Model: ${car.model}`}</h1>
-              <h2>{`Year: ${car.year}`}</h2>
-              <h2>{`Type: ${car.type}`}</h2>
+              <h1>Model: {car.model}</h1>
+              <h2>Year: {car.year}</h2>
+              <h2>Type: {car.type}</h2>
             </div>
-
             <Image src={car.img} alt="cars" />
             <div>
-              <Button onClick={() => this.getOne(car.id)}>Pick Car</Button>
-              <Button onClick={() => this.putData(car.id)}>Update Car</Button>
+
+              <Button onClick={() => this.putData(car.id)}>Edit</Button>
               <Button onClick={() => this.removeData(car.id)}>Delete</Button>
+
+              <Input
+                onChange={e => this.handleChange(e.target.value)}
+                type="text"
+                placeholder="search bar"
+              />
+              <Button onClick={() => this.getCar(this.state.userInput)}>Enter</Button>
             </div>
           </Container>
         </div>
       );
     });
-    return <div>{mapped}</div>;
+    return <div>{mapped[this.state.index]}</div>;
   }
 }
 
@@ -111,39 +143,40 @@ const Container = styled.div`
   top: 20vh;
   bottom: 20vh;
   flex-wrap: wrap;
-
-  
+  padding: 0.2rem;
 `;
-
-
 
 const Button = styled.button`
   background-color: blue;
   border: solid-black 2px;
   color: white;
-  padding: 10px 10px;
+  padding: 10px 12px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 10px;
   border-radius: 6px;
-  box-shadow:4px 4px grey;
-  justify-content:space-between;
-  margin:5px;
+  box-shadow: 4px 4px grey;
+  justify-content: space-between;
+  margin: 20px;
 `;
 const Image = styled.img`
-background:black;
+  background: black;
   height: 44vh;
   width: 40vw;
-  border:light grey;
-  border-radius:8px;
-  align-items:center;
-  margin:80px;
-  padding:30px;
+  border: light grey;
+  border-radius: 8px;
+  align-items: center;
+  margin: 80px;
+  padding: 30px;
   box-shadow: 10px 8px grey;
-
-  
-  
+`;
+const Input = styled.input`
+  border-radius: 10px;
+  box-shadow: 5px 8px grey;
+  justify-content: space-between;
+  margin: 20px;
+  height: 3.5vh;
 `;
 
 export default Content;

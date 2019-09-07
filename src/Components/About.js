@@ -35,6 +35,9 @@ export default function About() {
         The G-Wagen is characterised by its boxy styling and body-on-frame construction. It uses three fully locking differentials, one of the few vehicles to have such a feature.
         
         Despite the introduction of an intended replacement, the unibody SUV Mercedes-Benz GL-Class in 2006, the G-Class is still in production and is one of the longest produced vehicles in Daimler's history, with a span of 40 years. Only the Unimog surpasses it.[4]</h3>
+<h3>Buggati:Bugatti Automobiles S.A.S. (French pronunciation: ​[bygati]) is a French high-performance luxury automobiles manufacturer and a subsidiary of Volkswagen AG, with its head office and assembly plant in Molsheim, Alsace, France. Volkswagen purchased the Bugatti trademark in June 1998 and incorporated Bugatti Automobiles S.A.S. in 1999.
+
+Bugatti presented several concept cars between 1998 and 2000 before commencing development of its first production model, the Veyron 16.4, delivering the first Veyron to a customer in 2005.</h3>       
         </div>
         )
     }

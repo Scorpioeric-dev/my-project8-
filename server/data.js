@@ -97,6 +97,14 @@ const sportCars = [
     type: "sport",
     img:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbWeCKTDhcExqif3IvJP-7iOj7vKoURTPJLc7bXNKNRWVIXRtlpw"
+  },
+  {
+    id:12,
+    model:'Buggati',
+    year:2020,
+    color:'metallic grey',
+    type:'sport',
+    img:'https://upload.wikimedia.org/wikipedia/commons/1/16/Bugatti_Divo%2C_GIMS_2019%2C_Le_Grand-Saconnex_%28GIMS0029%29.jpg'
   }
 ];
 

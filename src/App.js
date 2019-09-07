@@ -6,31 +6,48 @@ import Next from "./Components/Next";
 import Prev from "./Components/Prev";
 import Zoom from "react-reveal/Zoom";
 import About from "./Components/About";
-import styled from 'styled-components'
+import styled from "styled-components";
+import Create from "./Components/Create";
+import { linkSync } from "fs";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       sportCars: [],
-      userInput: ""
+      userInput: "",
+      index: 0,
+      id:0
     };
   }
 
   prev = () => {
     if (this.state.index === 0) {
       this.setState({
-        index: this.state.index - 10
+        index: 12
       });
     } else {
       this.setState({ index: this.state.index - 1 });
     }
   };
   next = () => {
-    this.setState({
-      index: this.state.index + 1
-    });
+    if(this.state.index === 11){
+      this.setState({
+        index:0
+      });
+
+    } else {
+      this.setState({index: this.state.index + 1})
+    }
+  console.log(this.state);
   };
+
+  // hamburger.addEventListener('click', () => {
+  //   navLinks.classList.toggle('open')
+  //   linkSync.forEach(link => {
+  //     link.classList.toggle('fade')
+  //   })
+  // })
   render() {
     const { sportCars } = this.state;
     console.log(this.state.sportCars);
@@ -54,12 +71,12 @@ class App extends Component {
             <Header />
           </div>
           <Content />
-          <div>{mapped[this.state.index]}</div>
+          <div>{mapped[this.state.id]}</div>
           <div className="button">
             <Next className="next" next={this.next} />
-            <Prev className="prev" previous={this.prev} />
+            <Prev className="prev" prev={this.prev} />
           </div>
-          
+          <Create />
         </Zoom>
       </div>
     );

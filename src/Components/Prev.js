@@ -2,6 +2,9 @@ import React,{Component} from "react";
 import styled from 'styled-components'
 
 export default class Prev extends Component{
+  state = {
+    userInput:''
+  }
 
   handleChange = value => {
     this.setState({ input: value });
