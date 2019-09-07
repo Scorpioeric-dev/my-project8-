@@ -22,7 +22,7 @@ export class Content extends Component {
     this.getData();
   }
 
-  getData() {
+  getData = () => {
     axios
       .get(`/api/cars`)
       .then(res => {
@@ -38,29 +38,30 @@ export class Content extends Component {
       });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.sportCars.length &&
-      prevState.sportCars.length !== this.state.sportCars.length
-    ) {
-      this.getData();
-    }
-  }
-  getCar = userInput => {
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (
+  //     prevState.sportCars.length &&
+  //     prevState.sportCars.length !== this.state.sportCars.length
+  //   ) {
+  //     this.getData();
+  //   }
+  // }
+  getCar = () => {
     let filteredCar = this.state.sportCars.filter(ele => {
-      // console.log(ele.model);
-      return ele.model.toLowerCase().includes(userInput.toLowerCase());
+      //This filters through your data and provides you the one your 
+      return ele.model.toLowerCase().includes(this.state.userInput.toLowerCase());
     });
+    // let searchCar = this.state.filteredCar.push(filteredCar);
+    // console.log(this.state.filteredCar)
     if (filteredCar[0]) {
+      // console.log(searchCar)
       this.setState({
-        currentImg: filteredCar[0].img,
-        model: filteredCar[0].model,
-        year: filteredCar[0].year,
-        type: filteredCar[0].type
+       sportCars:filteredCar
       });
     } else {
       alert("Does Not Exist");
     }
+    console.log(this.state)
   };
 
   getOne = id => {
@@ -126,7 +127,7 @@ export class Content extends Component {
 
   render() {
     let { sportCars } = this.state;
-    console.log(this.state);
+    // console.log(this.state);
     let mapped = sportCars.map(car => {
       return (
         <div className="body" key={car.id} data={car}>
@@ -138,6 +139,7 @@ export class Content extends Component {
             </div>
             <Image src={car.img} alt="cars" />
             <div>
+            
               <Button onClick={() => this.putData(car.id)}>Edit</Button>
               <Button onClick={() => this.removeData(car.id)}>Delete</Button>
 
@@ -146,7 +148,7 @@ export class Content extends Component {
                 type="text"
                 placeholder="search bar"
               />
-              <Button onClick={() => this.getCar(this.state.userInput)}>
+               <Button onClick={this.getCar} onDoubleClick={this.getData}>
                 Enter
               </Button>
             </div>
