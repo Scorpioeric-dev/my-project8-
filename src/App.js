@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import "./App.css";
 import Header from "./Components/Header";
 import Content from "./Components/Content";
-import Next from "./Components/Next";
-import Prev from "./Components/Prev";
+import Hamburger from "./Components/Hamburger";
 import Zoom from "react-reveal/Zoom";
-import About from "./Components/About";
+
 import styled from "styled-components";
-import Create from "./Components/Create";
+
 import { linkSync } from "fs";
 
 class App extends Component {
@@ -17,30 +16,9 @@ class App extends Component {
       sportCars: [],
       userInput: "",
       index: 0,
-      id:0
+      id: 0
     };
   }
-
-  prev = () => {
-    if (this.state.index === 0) {
-      this.setState({
-        index: 12
-      });
-    } else {
-      this.setState({ index: this.state.index - 1 });
-    }
-  };
-  next = () => {
-    if(this.state.index === 11){
-      this.setState({
-        index:0
-      });
-
-    } else {
-      this.setState({index: this.state.index + 1})
-    }
-  console.log(this.state);
-  };
 
   // hamburger.addEventListener('click', () => {
   //   navLinks.classList.toggle('open')
@@ -50,7 +28,7 @@ class App extends Component {
   // })
   render() {
     const { sportCars } = this.state;
-    console.log(this.state.sportCars);
+    console.log(this.state.index);
     let mapped = sportCars.map(car => {
       return (
         <Container key={car.id}>
@@ -72,11 +50,8 @@ class App extends Component {
           </div>
           <Content />
           <div>{mapped[this.state.id]}</div>
-          <div className="button">
-            <Next className="next" next={this.next} />
-            <Prev className="prev" prev={this.prev} />
-          </div>
-          <Create />
+
+          <Hamburger />
         </Zoom>
       </div>
     );

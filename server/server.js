@@ -1,9 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
-const port = 4444
 const ctrl = require('./controller')
-
-
+const {port} = process.env
 app.use(express.json())
 app.listen(port,()=> console.log(`Me and my ${port}`))
 

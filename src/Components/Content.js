@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Next from "./Next";
+import Prev from "./Prev";
 
 export class Content extends Component {
   state = {
@@ -44,30 +46,31 @@ export class Content extends Component {
       this.getData();
     }
   }
-  // getCar = (userInput) => {
-  //   let filteredCar = this.state.sportCars.filter(ele => {
-  //     return ele.name.toLowerCase().includes(userInput.toLowerCase());
-  //   });
-  //   if (filteredCar[0]) {
-  //     this.setState({
-  //       currentImg: filteredCar[0].img,
-  //       model: filteredCar[0].model,
-  //       year: filteredCar[0].year,
-  //       type: filteredCar[0].type
-  //     });
-  //   } else {
-  //     alert("Does Not Exist");
-  //   }
-  // }
+  getCar = userInput => {
+    let filteredCar = this.state.sportCars.filter(ele => {
+      // console.log(ele.model);
+      return ele.model.toLowerCase().includes(userInput.toLowerCase());
+    });
+    if (filteredCar[0]) {
+      this.setState({
+        currentImg: filteredCar[0].img,
+        model: filteredCar[0].model,
+        year: filteredCar[0].year,
+        type: filteredCar[0].type
+      });
+    } else {
+      alert("Does Not Exist");
+    }
+  };
 
-  // getOne = id => {
-  //   axios.get(`/api/car/${id}`).then(res => {
-  //     // console.log([res.data]);
-  //     this.setState({
-  //       sportCars: [res.data]
-  //     });
-  //   });
-  // };
+  getOne = id => {
+    axios.get(`/api/car/${id}`).then(res => {
+      // console.log([res.data]);
+      this.setState({
+        sportCars: [res.data]
+      });
+    });
+  };
   //work on the put function is not working on front end or backend
   putData = (id, body) => {
     // const { model, year, type, img } = this.state;
@@ -95,6 +98,26 @@ export class Content extends Component {
     });
   };
 
+  prev = () => {
+    if (this.state.index === 0) {
+      this.setState({
+        index: 12
+      });
+    } else {
+      this.setState({ index: this.state.index - 1 });
+    }
+  };
+  next = () => {
+    if (this.state.index === 11) {
+      this.setState({
+        index: 0
+      });
+    } else {
+      this.setState({ index: this.state.index + 1 });
+    }
+    // console.log(this.state);
+  };
+
   handleChange = e => {
     this.setState({
       userInput: e
@@ -107,7 +130,6 @@ export class Content extends Component {
     let mapped = sportCars.map(car => {
       return (
         <div className="body" key={car.id} data={car}>
-        
           <Container>
             <div>
               <h1>Model: {car.model}</h1>
@@ -116,7 +138,6 @@ export class Content extends Component {
             </div>
             <Image src={car.img} alt="cars" />
             <div>
-
               <Button onClick={() => this.putData(car.id)}>Edit</Button>
               <Button onClick={() => this.removeData(car.id)}>Delete</Button>
 
@@ -125,9 +146,15 @@ export class Content extends Component {
                 type="text"
                 placeholder="search bar"
               />
-              <Button onClick={() => this.getCar(this.state.userInput)}>Enter</Button>
+              <Button onClick={() => this.getCar(this.state.userInput)}>
+                Enter
+              </Button>
             </div>
           </Container>
+          <div className="button">
+          <Next className="next" next={this.next} />
+          <Prev className="prev" prev={this.prev} />
+          </div>
         </div>
       );
     });
