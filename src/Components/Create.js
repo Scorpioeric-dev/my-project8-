@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+
 
 export default class Create extends Component {
   state = {
@@ -17,18 +17,26 @@ export default class Create extends Component {
   // putData = id => {
   //   const { model, year, type, img } = this.state;
   //   axios.put(`/api/car/${id}`, { model, year, type, img }).then(res => {
-  //     // console.log(res.data);
+  //     console.log(res.data);
   //     this.setState({
   //       sportCars: res.data
   //     });
   //   });
   // };
+
   postData = () => {
+    //this is the body I'm sending back to endpoints
     const { model, year, type, img } = this.state;
     axios.post(`/api/cars`, { model, year, type, img }).then(res => {
+
       this.setState({ sportCars: res.data });
+      console.log(res.data)
     });
+    //reload page as soon as post is ran
+    window.location.reload()
   };
+
+//the target name is defined within the user input div in render
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value

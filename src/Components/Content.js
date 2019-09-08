@@ -10,12 +10,13 @@ export class Content extends Component {
     model: "",
     year: "",
     type: "",
-    currentImg: "",
+    img: "",
     id: "",
     filteredCar: [],
     filteredId: 0,
-    userInput: "",
-    index: 0
+    userInput: "",//search
+    index: 0,
+    editing: false
   };
 
   componentDidMount() {
@@ -29,15 +30,18 @@ export class Content extends Component {
         // console.log(res.data);
         this.setState({
           sportCars: res.data,
-          currentImg: res.data[res.data.length - 1].img
+          img: res.data[res.data.length - 1].img
         });
       })
       .catch(error => {
         alert(error);
         //user method
       });
-  }
-
+  };
+  //This fn toggles the keys in my object to allow me to edit the data on said keys
+  toggleEdit = () => {
+    this.setState({ editing: !this.state.editing });
+  };
   // componentDidUpdate(prevProps, prevState) {
   //   if (
   //     prevState.sportCars.length &&
@@ -48,20 +52,22 @@ export class Content extends Component {
   // }
   getCar = () => {
     let filteredCar = this.state.sportCars.filter(ele => {
-      //This filters through your data and provides you the one your 
-      return ele.model.toLowerCase().includes(this.state.userInput.toLowerCase());
+      //This filters through your data and provides you the one your
+      return ele.model
+        .toLowerCase()
+        .includes(this.state.userInput.toLowerCase());
     });
     // let searchCar = this.state.filteredCar.push(filteredCar);
     // console.log(this.state.filteredCar)
     if (filteredCar[0]) {
       // console.log(searchCar)
       this.setState({
-       sportCars:filteredCar
+        sportCars: filteredCar
       });
     } else {
       alert("Does Not Exist");
     }
-    console.log(this.state)
+    console.log(this.state);
   };
 
   getOne = id => {
@@ -72,15 +78,18 @@ export class Content extends Component {
       });
     });
   };
-  //work on the put function is not working on front end or backend
-  putData = (id, body) => {
-    // const { model, year, type, img } = this.state;
-    axios.put(`/api/car/${id}`, body).then(res => {
-      // console.log(res.data);
-      this.setState({
-        sportCars: res.data
+  //work on the put function is not working on front end
+  putData = id => {
+    const { model, year, type, img } = this.state;
+    axios
+      .put(`/api/car/${id}`, { model: model, year: year, type: type, img: img })
+      .then(res => {
+        // console.log(res.data);
+        this.setState({
+          sportCars: res.data
+        });
       });
-    });
+    this.toggleEdit();
   };
 
   removeData = id => {
@@ -90,24 +99,25 @@ export class Content extends Component {
     });
   };
 
-  postData = () => {
-    const { model, year, type, img } = this.state;
-    axios.post(`/api/cars`, { model, year, type, img }).then(res => {
-      this.setState({
-        sportcars: res.data
-      });
-    });
-  };
+  // postData = () => {
+  //   const { model, year, type, img } = this.state;
+  //   axios.post(`/api/cars`, { model, year, type, img }).then(res => {
+  //     this.setState({
+  //       sportCars: res.data
+  //     });
+  //   });
+  // };
 
   prev = () => {
     if (this.state.index === 0) {
       this.setState({
-        index: 12
+        index: this.state.index - 11
       });
     } else {
       this.setState({ index: this.state.index - 1 });
     }
   };
+
   next = () => {
     if (this.state.index === 11) {
       this.setState({
@@ -119,45 +129,75 @@ export class Content extends Component {
     // console.log(this.state);
   };
 
-  handleChange = e => {
+  handleChange(e, key) {
     this.setState({
-      userInput: e
+      [key]: e.target.value
     });
-  };
-
+  }
+//The container holds the actual toggle and allows me to see my data for each obj and then manipulate it with an image as well
   render() {
     let { sportCars } = this.state;
-    // console.log(this.state);
+    console.log(this.state.img);
     let mapped = sportCars.map(car => {
       return (
-        <div className="body" key={car.id} data={car}>
+        <h2 className="body" key={car.id} data={car}>
           <Container>
-            <div>
-              <h1>Model: {car.model}</h1>
-              <h2>Year: {car.year}</h2>
-              <h2>Type: {car.type}</h2>
-            </div>
+            {!this.state.editing ? (
+              <section>
+                <h1 onClick={this.toggleEdit}>Model: {car.model}</h1>
+                <h2>Year: {car.year}</h2>
+                <h2>Type: {car.type}</h2>
+              </section>
+            ) : (
+              <section>
+                <input
+                  onChange={e => this.handleChange(e,('model'))}
+                  name="model"
+                  type="text"
+                  defaultValue={car.model}
+                />
+                <input
+                  onChange={e => this.handleChange(e,('year'))}
+                  name="type"
+                  type="text"
+                  defaultValue={car.year}
+                />
+                <input
+                  onChange={e => this.handleChange(e,('type'))}
+                  name="year"
+                  type="text"
+                  defaultValue={car.type}
+                />
+                <input
+                  onChange={e => this.handleChange(e,('img'))}
+                  name="img"
+                  type="text"
+                  defaultValue={car.img}
+                />
+
+
+                </section>
+            )}
             <Image src={car.img} alt="cars" />
             <div>
-            
               <Button onClick={() => this.putData(car.id)}>Edit</Button>
               <Button onClick={() => this.removeData(car.id)}>Delete</Button>
 
               <Input
-                onChange={e => this.handleChange(e.target.value)}
+                onChange={e => this.handleChange(e,'userInput')}
                 type="text"
                 placeholder="search bar"
               />
-               <Button onClick={this.getCar} onDoubleClick={this.getData}>
+              <Button onClick={this.getCar} onDoubleClick={this.getData}>
                 Enter
               </Button>
             </div>
           </Container>
           <div className="button">
-          <Next className="next" next={this.next} />
-          <Prev className="prev" prev={this.prev} />
+            <Next className="next" next={this.next} />
+            <Prev className="prev" prev={this.prev} />
           </div>
-        </div>
+        </h2>
       );
     });
     return <div>{mapped[this.state.index]}</div>;
@@ -206,6 +246,7 @@ const Input = styled.input`
   justify-content: space-between;
   margin: 20px;
   height: 3.5vh;
+  outline-width:0;
 `;
 
 export default Content;
