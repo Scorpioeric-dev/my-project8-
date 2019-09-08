@@ -111,15 +111,17 @@ export class Content extends Component {
   prev = () => {
     if (this.state.index === 0) {
       this.setState({
-        index: this.state.index - 11
+        index: 11
       });
+      console.log(this.state.index)
     } else {
       this.setState({ index: this.state.index - 1 });
     }
   };
 
   next = () => {
-    if (this.state.index === 11) {
+    //by setting the this.state.index to greater than 11 you don't have to delete
+    if (this.state.index > 11) {
       this.setState({
         index: 0
       });

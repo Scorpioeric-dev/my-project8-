@@ -28,7 +28,7 @@ export default class Create extends Component {
     //this is the body I'm sending back to endpoints
     const { model, year, type, img } = this.state;
     axios.post(`/api/cars`, { model, year, type, img }).then(res => {
-
+//this resets state to new obj
       this.setState({ sportCars: res.data });
       console.log(res.data)
     });

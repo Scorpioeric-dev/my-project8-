@@ -44,14 +44,14 @@ class App extends Component {
     });
     return (
       <div className="App">
-        <Zoom cascade-left>
-          <div>
+      <Zoom cascade-left>
+      <div>
+      <Hamburger />
             <Header />
           </div>
           <Content />
           <div>{mapped[this.state.id]}</div>
 
-          <Hamburger />
         </Zoom>
       </div>
     );
