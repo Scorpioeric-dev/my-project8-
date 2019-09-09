@@ -7,7 +7,6 @@ import Zoom from "react-reveal/Zoom";
 
 import styled from "styled-components";
 
-import { linkSync } from "fs";
 
 class App extends Component {
   constructor() {
@@ -20,16 +19,12 @@ class App extends Component {
       toggle: true
     };
   }
+  //Toggle function used in conditional rendering
   toggle = () => {
     this.setState({ toggle: !this.state.toggle });
   };
 
-  // hamburger.addEventListener('click', () => {
-  //   navLinks.classList.toggle('open')
-  //   linkSync.forEach(link => {
-  //     link.classList.toggle('fade')
-  //   })
-  // })
+  //This renders my assigned dashboard or homepage//maps over my data array
   render() {
     const { sportCars } = this.state;
     console.log(this.state.index);
@@ -48,7 +43,7 @@ class App extends Component {
     });
     return (
       <div className="App">
-        <Zoom cascade-left>
+        <Zoom left-cascade>
           {!this.state.toggle ? (
             <div>
               <Header />
@@ -64,6 +59,7 @@ class App extends Component {
     );
   }
 }
+//These styled components are defining how my container is displayed
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -73,6 +69,7 @@ const Container = styled.div`
   bottom: 20vh;
   flex-wrap: wrap;
 `;
+//This defines the size of my image
 const Image = styled.img`
   height: 20vh;
   width: 20vw;

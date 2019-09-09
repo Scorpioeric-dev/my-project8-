@@ -17,7 +17,7 @@ const Button = styled.button`
   background-color: blue;
   border: solid-black 4px;
   color: white;
-  padding: 8px 8px;
+  padding: 10px 12px;
   text-align: center;
   text-decoration: none;
   display: inline-block;

@@ -71,14 +71,7 @@ export class Content extends Component {
     console.log(this.state);
   };
 
-  // getOne = id => {
-  //   axios.get(`/api/car/${id}`).then(res => {
-  //     // console.log([res.data]);
-  //     this.setState({
-  //       sportCars: [res.data]
-  //     });
-  //   });
-  // };
+ 
   //This allows me to edit my entire object
   putData = id => {
     const { model, year, type, img } = this.state;
@@ -97,7 +90,11 @@ export class Content extends Component {
     axios.delete(`/api/car/${id}`).then(res => {
       // console.log(res.data);
       this.setState({ sportCars: res.data });
-    });
+    })
+    .catch(err => {
+      alert(err)
+    })
+
   };
 
   // postData = () => {
@@ -143,13 +140,13 @@ export class Content extends Component {
     console.log(this.state.img);
     let mapped = sportCars.map(car => {
       return (
-        <h2 className="body" key={car.id} data={car}>
+        <Main className="body" key={car.id} data={car}>
           {!this.state.editing ? (
-            <section>
+            <Section>
               <h1 onClick={this.toggleEdit}>Model: {car.model}</h1>
               <h2>Year: {car.year}</h2>
               <h2>Type: {car.type}</h2>
-            </section>
+            </Section>
           ) : (
             <section>
               <input
@@ -199,7 +196,7 @@ export class Content extends Component {
             <Next className="next" next={this.next} />
             <Prev className="prev" prev={this.prev} />
           </div>
-        </h2>
+        </Main>
       );
     });
     return <div>{mapped[this.state.index]}</div>;
@@ -225,7 +222,7 @@ const Button = styled.button`
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 10px;
+  font-size: 15px;
   border-radius: 6px;
   box-shadow: 4px 4px grey;
   justify-content: space-between;
@@ -233,14 +230,14 @@ const Button = styled.button`
 `;
 const Image = styled.img`
   background: black;
-  height: 44vh;
-  width: 40vw;
+  height: 45vh;
+  width: 45vw;
   border: light grey;
   border-radius: 8px;
   align-items: center;
   margin: 80px;
   padding: 30px;
-  box-shadow: 10px 8px grey;
+  box-shadow: 10px 8px  grey;
 `;
 const Input = styled.input`
   border-radius: 10px;
@@ -250,5 +247,77 @@ const Input = styled.input`
   height: 3.5vh;
   outline-width: 0;
 `;
+const Section = styled.div`
+font-size:25px;
+
+`
+
+const Main = styled.div`
+margin:auto;
+text-align:center;
+font-family:'sans-serif';
+`
+
+///Trying to figure out media query with styled components
+
+// @media only screen and (min-device-width:320px) and (max-device-width:480px){`
+
+//   const Container = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   postion: relative;
+//   top: 20vh;
+//   bottom: 20vh;
+//   flex-wrap: wrap;
+//   padding: 0.2rem;
+// ;
+
+//  styled.button
+//   background-color: blue;
+//   border: solid-black 2px;
+//   color: white;
+//   padding: 10px 12px;
+//   text-align: center;
+//   text-decoration: none;
+//   display: inline-block;
+//   font-size: 15px;
+//   border-radius: 6px;
+//   box-shadow: 4px 4px grey;
+//   justify-content: space-between;
+//   margin: 20px;
+// ;
+// styled.img
+//   background: black;
+//   height: 45vh;
+//   width: 45vw;
+//   border: light grey;
+//   border-radius: 8px;
+//   align-items: center;
+//   margin: 80px;
+//   padding: 30px;
+//   box-shadow: 10px 8px  grey;
+// ;
+//   border-radius: 10px;
+//   box-shadow: 5px 8px grey;
+//   justify-content: space-between;
+//   margin: 20px;
+//   height: 3.5vh;
+//   outline-width: 0;
+// ;
+// styled.div
+// font-size:25px;
+
+
+
+//  styled.div
+// margin:auto;
+// text-align:center;
+// font-family:'sans-serif';
+// }`
+
+
+
+
 
 export default Content;

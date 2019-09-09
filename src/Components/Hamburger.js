@@ -25,11 +25,11 @@ export default class Hamburger extends Component {
               menuClicked={this.handleClick.bind(this)}
               width={0}
               height={0}
-              strokeWidth={2}
+              strokeWidth={3}
               rotate={0}
-              color="blue"
+              color="black"
               borderRadius={0}
-              animationDuration={0.9}
+              animationDuration={1.5}
             />
           </div>
         ) : (
@@ -44,8 +44,9 @@ export default class Hamburger extends Component {
               rotate={0}
               color="blue"
               borderRadius={0}
-              animationDuration={0.5}
+              animationDuration={1.5}
               margin={100}
+    
             />
             <div className="line"></div>
             <div className="line"></div>

@@ -70,7 +70,7 @@ const InputContainer = styled.div`
   padding: 90px;
   height: 20vh;
   width: 17vw;
-  margin: 40px;
+  margin: 25px;
 `;
 const Button = styled.button`
   background-color: blue;

@@ -30,7 +30,7 @@ module.exports = {
     data.splice(index, 1);
     res.status(200).send(data);
   },
-  //put functionality is not working in the backend and requires img to be defined . 
+  //This allows me to manipulate the keys within an object set in database 
   putData: (req, res) => {
     const { id } = req.params;
     const { year, img, type, model } = req.body;

@@ -18,6 +18,7 @@ class Header extends Component {
       <h1 id="Header" style={{ color: "blue"}}>
       Baller Whips
       </h1>
+      <HeaderImg/>
       <Hamburger/>
         </header>
       </div>
