@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import HeaderImg from "./HeaderImg";
-import About from "./About";
-import Create from "./Create";
+import Hamburger from './Hamburger'
+
 
 class Header extends Component {
   constructor(props) {
@@ -13,12 +13,12 @@ class Header extends Component {
     
     return (
       <div>
-        <header className="sportRides">
-          <HeaderImg />
-          <h1 id="Header" style={{ color: "blue"}}>
-            Baller Whips
-          </h1>
-          <HeaderImg/>
+      <header className="sportRides">
+      <HeaderImg />
+      <h1 id="Header" style={{ color: "blue"}}>
+      Baller Whips
+      </h1>
+      <Hamburger/>
         </header>
       </div>
     );

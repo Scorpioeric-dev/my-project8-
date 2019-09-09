@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Next from "./Next";
 import Prev from "./Prev";
+import Hamburger from "./Hamburger";
 
 export class Content extends Component {
   state = {
@@ -14,7 +15,7 @@ export class Content extends Component {
     id: "",
     filteredCar: [],
     filteredId: 0,
-    userInput: "",//search
+    userInput: "", //search
     index: 0,
     editing: false
   };
@@ -70,15 +71,15 @@ export class Content extends Component {
     console.log(this.state);
   };
 
-  getOne = id => {
-    axios.get(`/api/car/${id}`).then(res => {
-      // console.log([res.data]);
-      this.setState({
-        sportCars: [res.data]
-      });
-    });
-  };
-  //work on the put function is not working on front end
+  // getOne = id => {
+  //   axios.get(`/api/car/${id}`).then(res => {
+  //     // console.log([res.data]);
+  //     this.setState({
+  //       sportCars: [res.data]
+  //     });
+  //   });
+  // };
+  //This allows me to edit my entire object
   putData = id => {
     const { model, year, type, img } = this.state;
     axios
@@ -113,7 +114,7 @@ export class Content extends Component {
       this.setState({
         index: 11
       });
-      console.log(this.state.index)
+      console.log(this.state.index);
     } else {
       this.setState({ index: this.state.index - 1 });
     }
@@ -136,57 +137,56 @@ export class Content extends Component {
       [key]: e.target.value
     });
   }
-//The container holds the actual toggle and allows me to see my data for each obj and then manipulate it with an image as well
+  //The container holds the actual toggle and allows me to see my data for each obj and then manipulate it with an image as well
   render() {
     let { sportCars } = this.state;
     console.log(this.state.img);
     let mapped = sportCars.map(car => {
       return (
         <h2 className="body" key={car.id} data={car}>
+          {!this.state.editing ? (
+            <section>
+              <h1 onClick={this.toggleEdit}>Model: {car.model}</h1>
+              <h2>Year: {car.year}</h2>
+              <h2>Type: {car.type}</h2>
+            </section>
+          ) : (
+            <section>
+              <input
+                onChange={e => this.handleChange(e, "model")}
+                name="model"
+                type="text"
+                defaultValue={car.model}
+              />
+              <input
+                onChange={e => this.handleChange(e, "year")}
+                name="type"
+                type="text"
+                defaultValue={car.year}
+              />
+              <input
+                onChange={e => this.handleChange(e, "type")}
+                name="year"
+                type="text"
+                defaultValue={car.type}
+              />
+              <input
+                onChange={e => this.handleChange(e, "img")}
+                name="img"
+                type="text"
+                defaultValue={car.img}
+              />
+            </section>
+          )}
+
           <Container>
-            {!this.state.editing ? (
-              <section>
-                <h1 onClick={this.toggleEdit}>Model: {car.model}</h1>
-                <h2>Year: {car.year}</h2>
-                <h2>Type: {car.type}</h2>
-              </section>
-            ) : (
-              <section>
-                <input
-                  onChange={e => this.handleChange(e,('model'))}
-                  name="model"
-                  type="text"
-                  defaultValue={car.model}
-                />
-                <input
-                  onChange={e => this.handleChange(e,('year'))}
-                  name="type"
-                  type="text"
-                  defaultValue={car.year}
-                />
-                <input
-                  onChange={e => this.handleChange(e,('type'))}
-                  name="year"
-                  type="text"
-                  defaultValue={car.type}
-                />
-                <input
-                  onChange={e => this.handleChange(e,('img'))}
-                  name="img"
-                  type="text"
-                  defaultValue={car.img}
-                />
-
-
-                </section>
-            )}
             <Image src={car.img} alt="cars" />
             <div>
               <Button onClick={() => this.putData(car.id)}>Edit</Button>
               <Button onClick={() => this.removeData(car.id)}>Delete</Button>
 
               <Input
-                onChange={e => this.handleChange(e,'userInput')}
+                onChange={e => this.handleChange(e, "userInput")}
                 type="text"
                 placeholder="search bar"
               />
@@ -248,7 +248,7 @@ const Input = styled.input`
   justify-content: space-between;
   margin: 20px;
   height: 3.5vh;
-  outline-width:0;
+  outline-width: 0;
 `;
 
 export default Content;

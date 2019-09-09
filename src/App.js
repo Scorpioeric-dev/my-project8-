@@ -16,9 +16,13 @@ class App extends Component {
       sportCars: [],
       userInput: "",
       index: 0,
-      id: 0
+      id: 0,
+      toggle: true
     };
   }
+  toggle = () => {
+    this.setState({ toggle: !this.state.toggle });
+  };
 
   // hamburger.addEventListener('click', () => {
   //   navLinks.classList.toggle('open')
@@ -44,14 +48,17 @@ class App extends Component {
     });
     return (
       <div className="App">
-      <Zoom cascade-left>
-      <div>
-      <Hamburger />
-            <Header />
-          </div>
-          <Content />
-          <div>{mapped[this.state.id]}</div>
-
+        <Zoom cascade-left>
+          {!this.state.toggle ? (
+            <div>
+              <Header />
+            </div>
+          ) : (
+            <div>
+              <Header />
+              <Content />
+            </div>
+          )}
         </Zoom>
       </div>
     );

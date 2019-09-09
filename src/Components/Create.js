@@ -67,10 +67,10 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 40px;
-  padding: 40px;
+  padding: 90px;
   height: 20vh;
   width: 17vw;
-  margin: 20px;
+  margin: 40px;
 `;
 const Button = styled.button`
   background-color: blue;
