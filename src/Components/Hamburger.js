@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Create from "./Create";
-import About from "./About";
-import HamburgerMenu from "react-hamburger-menu";
-import styled from 'styled-components'
 
+import HamburgerMenu from "react-hamburger-menu";
+import styled from "styled-components";
 
 export default class Hamburger extends Component {
   state = {
@@ -20,37 +19,37 @@ export default class Hamburger extends Component {
     return (
       <div>
         {!this.state.open ? (
-          <div className='hamburger'>
+          <div className="hamburger">
             <HamburgerMenu
               isOpen={this.state.open}
               menuClicked={this.handleClick.bind(this)}
               width={0}
               height={0}
-              strokeWidth={1}
+              strokeWidth={2}
               rotate={0}
-              color="black"
+              color="blue"
               borderRadius={0}
-              animationDuration={0.5}
+              animationDuration={0.9}
             />
           </div>
         ) : (
-          <div className='hamburger'>
+          <div className="hamburger">
             <HamburgerMenu
               isOpen={this.state.open}
               menuClicked={this.handleClick.bind(this)}
               toggle={this.props.toggleEdit}
               width={0}
               height={0}
-              strokeWidth={1}
+              strokeWidth={3}
               rotate={0}
-              color="black"
+              color="blue"
               borderRadius={0}
               animationDuration={0.5}
               margin={100}
             />
-            <div className='line'></div>
-            <div className='line'></div>
-            <div className='line'></div>
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
             <Create />
           </div>
         )}
@@ -58,8 +57,3 @@ export default class Hamburger extends Component {
     );
   }
 }
-// const StyledHamburgerMenu = styled.div`
-// margin:50px;
-// padding: 3.5rem 1.5em 0;
-// postion:fixed;
-// `
